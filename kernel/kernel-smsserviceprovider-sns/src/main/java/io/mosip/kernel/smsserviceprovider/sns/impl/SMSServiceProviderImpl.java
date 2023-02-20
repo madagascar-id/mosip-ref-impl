@@ -63,10 +63,11 @@ public class SMSServiceProviderImpl implements SMSServiceProvider {
 			requestDto.setMessage(message);
 
 			ResponseEntity<Object> entity =  restTemplate.exchange(api, HttpMethod.POST, setRequestHeader(requestDto, null), Object.class);
+			System.out.println(entity.getBody().toString());
 			LinkedHashMap<String, Object> smsServerResponseDto = (LinkedHashMap) entity.getBody();
-			smsResponseDTO.setMessage((String) smsServerResponseDto.get("MessageId"));
 			LinkedHashMap<String, Object> responseMetaData = (LinkedHashMap<String, Object>) smsServerResponseDto.get("ResponseMetadata");
-			smsResponseDTO.setStatus(responseMetaData.get("HTTPStatusCode") + " : " + responseMetaData.get("RequestId")+ " : Retry Attempts " + responseMetaData.get("RetryAttempts"));
+			smsResponseDTO.setMessage("Message ID : " + smsServerResponseDto.get("MessageId") + ", HTTP Status Code : " + responseMetaData.get("HTTPStatusCode") + ", Request ID : " + responseMetaData.get("RequestId")+ ", Retry Attempts : " + responseMetaData.get("RetryAttempts"));
+			smsResponseDTO.setStatus("success");
 		} catch (HttpClientErrorException | HttpServerErrorException | IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
