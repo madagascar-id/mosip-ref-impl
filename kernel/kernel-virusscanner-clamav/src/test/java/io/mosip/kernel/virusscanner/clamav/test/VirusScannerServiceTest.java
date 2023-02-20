@@ -33,7 +33,7 @@ import xyz.capybara.clamav.exceptions.ClamavException;
  *
  */
 @RunWith(MockitoJUnitRunner.class)
-@TestPropertySource({ "classpath:application.properties" })
+@TestPropertySource({ "classpath:application-local.properties" })
 public class VirusScannerServiceTest {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
