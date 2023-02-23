@@ -59,7 +59,7 @@ public class SMSServiceProviderImpl implements SMSServiceProvider {
 
 		try {
 			SmsVendorRequestDto requestDto = new SmsVendorRequestDto();
-			requestDto.setPhone_number(contactNumber);
+			requestDto.setPhone_number(countryCode + contactNumber);
 			requestDto.setMessage(message);
 
 			ResponseEntity<Object> entity =  restTemplate.exchange(api, HttpMethod.POST, setRequestHeader(requestDto, null), Object.class);
